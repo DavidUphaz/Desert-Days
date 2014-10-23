@@ -1,0 +1,126 @@
+/*
+Theme Name: Desert Days
+Theme URI: http://underscores.me/
+Author: David Uphaz
+Author URI: http://underscores.me/
+Description: A theme for Desert Days web site
+Version: 1.0-wpcom
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: desert-days
+Domain Path: /languages/
+Tags:
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+ Desert Days is based on Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
+
+*/
+
+/*
+Global font specification
+=============================================
+*/
+
+.desert_days_font {
+    font-weight: bolder;
+    font-family: Guttman Hodes;
+    font-size: large;
+    color: black;
+}
+
+ /*
+ Navbar
+ =============================================
+ */
+
+.navbar, .navbar-nav {
+    display: inline-block;
+    float: none;
+    background-color: rgba(255,255,255,.0);
+    border: 0!important;
+}
+
+.navbar-collapse {
+    text-align: center;
+    border: 0;
+}
+
+.navbar-collapse.in {
+    overflow-y: visible;
+}
+
+@media screen and (max-width:767px) {
+	.navbar-collapse {
+		text-align: right;
+	}
+}
+
+.navbar-default .navbar-nav > .active > a {
+    background: rgba(112,59,45, .5);
+    color: white;
+    font-size: 19px;
+    padding-top: 15px;
+    letter-spacing: 3px;
+}
+
+ul.nav {
+    background:rgba(255,255,255, .3);
+    height:32px;
+}
+
+ul.nav a:hover {
+    background: rgba(112,59,45, .5) !important;
+    color: white !important;
+}
+
+.navbar-nav > li > a {
+    /*padding-top: 15px !important;*/
+    padding-bottom: 0px !important;
+}
+
+@media screen and (min-width:768px) {
+    .navbar .nav > li {
+        float:right;
+    }
+}
+
+.navbar .nav > li > a {
+    color: black;
+    text-decoration: underline;
+    font-size:16px;
+    letter-spacing: 3px;
+}
+
+.navbar .icon-bar {
+    background-color: white !important;
+    height: 3px !important;
+}
+
+.navbar-toggle {
+    background-color: rgba(0,0,0,.2);
+    border: 0;
+}
+
+.navbar-toggle:hover {
+    background: rgba(0, 0, 0, .5) !important;
+}
+
+.showNavbar{
+    text-align:center; 
+    background:rgba(166,166,166,.3);
+    font-weight: bold;
+    text-decoration: none;
+    position:fixed;
+    top:3px;
+    right:3px;
+    z-index:10;
+    display:none;
+    cursor:pointer;
+}
+
+.navbar-toggle {
+    padding:3px;
+    background-color:transparent;
+}
