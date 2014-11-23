@@ -46,8 +46,6 @@ function the_menu_items()
         $active = ($page->ID === get_the_ID() ? 'class="active"' : '');
         echo '<li '.$active.'><a href="'.get_page_link($page->ID).'">'.$page->post_title.'</a></li>'.PHP_EOL;
     }
-    echo '<li><a href="#">להזמנות</a></li>'.PHP_EOL;
-    echo '<li><a href="#" target="_blank">צור קשר</a></li>'.PHP_EOL;
     echo '<li><a style="padding:0;" href="'.home_url().'"><img src="'.get_template_directory_uri().'/Assets/logo.png" alt=""></a></li>'.PHP_EOL;
 }
 ?>
