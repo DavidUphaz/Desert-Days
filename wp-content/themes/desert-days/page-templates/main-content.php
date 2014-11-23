@@ -56,6 +56,7 @@ function get_carousel_image_items($images)
     }
     $item_class = "item active";
     $carousel_items_markup = "";
+    $template_dir_uri = get_template_directory_uri();
     foreach($images as $image)
     {
         $url = $image['url'];
