@@ -96,8 +96,9 @@ function desert_days_scripts() {
         wp_enqueue_style( 'custom-scroll-bar', get_template_directory_uri() . '/jquery.mCustomScrollbar.css');
         wp_enqueue_style( 'desert-days-style', get_stylesheet_uri() );
         if (is_page_template('page-templates/main-content.php'))
+        {
             wp_enqueue_style( 'desert-days-main-content-style', get_template_directory_uri() . '/layouts/main-content.css' );
-
+        }
         wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/bootstrap/js/bootstrap.min.js', array('jquery'), '', false );
 	wp_enqueue_script( 'custom-scrollbar-js', get_template_directory_uri() . '/js/jquery.mCustomScrollbar.concat.min.js', array('jquery'), '', false );
         wp_enqueue_script( 'touchSwipe-js', get_template_directory_uri() . '/js/jquery.touchSwipe.min.js', array('jquery'), '', false );
@@ -108,6 +109,18 @@ function desert_days_scripts() {
        
 }
 add_action( 'wp_enqueue_scripts', 'desert_days_scripts' );
+
+if (!function_exists('write_log')) :
+function write_log ( $log )  {
+    if ( true === WP_DEBUG ) {
+        if ( is_array( $log ) || is_object( $log ) ) {
+            error_log( print_r( $log, true ) );
+        } else {
+            error_log( $log );
+        }
+    }
+}
+endif;
 
 add_action( 'admin_init', 'hide_editor' );
 function hide_editor() {
