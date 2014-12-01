@@ -41,7 +41,7 @@ function carousel_positions()
 
 function the_menu_items()
 {
-    $pages = get_pages();
+    $pages = get_pages( array( 'sort_column' => 'menu_order') );
     foreach($pages as $page){
         $active = ($page->ID === get_the_ID() ? 'class="active"' : '');
         echo '<li '.$active.'><a href="'.get_page_link($page->ID).'">'.$page->post_title.'</a></li>'.PHP_EOL;
