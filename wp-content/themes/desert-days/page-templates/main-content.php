@@ -74,31 +74,34 @@ function get_carousel_image_items($images)
  */
 function get_carousel($carousel_id, $images, $carousel_text)
 {
+    if (!is_array($images) || count($images) < 1)
+        return("");
     $template_dir_uri = get_template_directory_uri();
     $to_text_markup = $to_carousel_markup = $text_markup = "";
     $text_markup = get_carousel_text($carousel_text);
     $title = get_sub_field('sub_page_title');
+    $title_cell = $to_text_cell = $prev_image_cell = $next_image_cell = "";
+    if ($title != "" && count($images) >= 1)
+        $title_cell = '<td class="sub-page-title">' . $title .'</td>';
     if ($carousel_text != "")
+        $to_text_cell = '<td><img class="sub-page-show-text" src="' . $template_dir_uri . '/Assets/to_text.png" alt=""/></td>';
+    if (count($images) > 1)
     {
-        $to_text_markup = <<< _TO_TEXT_MARKUP
-            <a class="anchor-next-slide" href="#$carousel_id" data-slide="next"></a>
-            <a class="anchor-prev-slide" href="#$carousel_id" data-slide="prev"></a>
-            <table>
-                <tr>
-                    <td>
-                        <img class="sub-page-show-text" src="$template_dir_uri/Assets/to_text.png" alt=""/>
-                    </td>
-                    <td>
-                        <img src="$template_dir_uri/Assets/prev.png" class="carousel-left-arrow" alt=""/>
-                    </td>
-                    <td class="sub-page-title">$title</td>
-                    <td>
-                        <img src="$template_dir_uri/Assets/next.png" class="carousel-right-arrow" alt=""/>
-                    </td>
-                </tr>
-            </table>
-_TO_TEXT_MARKUP;
+        $prev_image_cell = '<td><img src="' . $template_dir_uri . '/Assets/prev.png" class="carousel-left-arrow" alt=""/></td>';
+        $next_image_cell = '<td><img src="' . $template_dir_uri . '/Assets/next.png" class="carousel-right-arrow" alt=""/></td>';
     }
+    $to_text_markup = <<< _TO_TEXT_MARKUP
+        <a class="anchor-next-slide" href="#$carousel_id" data-slide="next"></a>
+        <a class="anchor-prev-slide" href="#$carousel_id" data-slide="prev"></a>
+        <table>
+            <tr>
+                $to_text_cell
+                $prev_image_cell
+                $title_cell
+                $next_image_cell
+            </tr>
+        </table>
+_TO_TEXT_MARKUP;
     $carousel_items_markup = get_carousel_image_items($images);
     
     $carousel_markup = <<< _CAROUSEL_MARKUP
