@@ -5,6 +5,51 @@
  * @package Desert Days
  */
 
+/*
+ * 
+ * multi language
+ */
+
+if ( ! isset( $languages ) ) {
+    $languages = array(
+        "he" => "עברית",
+        "en" => "English",
+        "fr" => "French",
+        "es" => "Spanish"
+    );
+}
+
+function language_display()
+{
+    global $languages;
+    return($languages[GET['lang']]);
+}
+
+function language_code()
+{
+    return(GET['lang']);
+}
+
+function add_language_to_url( $url) {
+    $info = parse_url( $url );
+    parse_str( $info['query'], $query );
+    $code = language_code();
+    return $info['scheme'] . '://' . $info['host'] . $info['path'] . '?' . http_build_query( $query ? array_merge( $query, array('lang' => $code ) ) : array( 'lang' => $code ) );
+}
+
+function supported_language_codes()
+{
+    global $languages;
+    return(array_keys($languages));
+}
+
+/**
+ * Check if string is null or empty
+ */
+function IsNullOrEmptyString($s){
+    return (!isset($s) || trim($s)==='');
+}
+
 /**
  * Set the content width based on the theme's design and stylesheet.
  */

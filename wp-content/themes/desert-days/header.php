@@ -44,7 +44,10 @@ function the_menu_items()
     $pages = get_pages( array( 'sort_column' => 'menu_order') );
     foreach($pages as $page){
         $active = ($page->ID === get_the_ID() ? 'class="active"' : '');
-        echo '<li '.$active.'><a href="'.get_page_link($page->ID).'">'.$page->post_title.'</a></li>'.PHP_EOL;
+        $label = get_field('page_title_'.language_code(), $page->ID);
+        if (IsNullOrEmptyString($label))
+            $label = $page->post_title;
+        echo '<li '.$active.'><a href="'.add_language_to_url(get_page_link($page->ID)).'">'.$label.'</a></li>'.PHP_EOL;
     }
     echo '<li><a style="padding:0;" href="'.home_url().'"><img src="'.get_template_directory_uri().'/Assets/logo.png" alt=""></a></li>'.PHP_EOL;
 }
