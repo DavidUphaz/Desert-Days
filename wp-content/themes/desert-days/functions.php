@@ -5,42 +5,50 @@
  * @package Desert Days
  */
 
-/*
- * 
+/**
  * multi language
  */
 
-if ( ! isset( $languages ) ) {
-    $languages = array(
+function languages()
+{
+    return(array(
         "he" => "עברית",
         "en" => "English",
         "fr" => "French",
         "es" => "Spanish"
-    );
+    ));
 }
 
-function language_display()
+function default_language_code()
 {
-    global $languages;
-    return($languages[GET['lang']]);
+    return(supported_language_codes()[0]);
 }
 
 function language_code()
 {
-    return(GET['lang']);
+    $code = filter_input(INPUT_GET, 'lang');
+    $lang_array = languages();
+    if (!$code || IsNullOrEmptyString($code) || !array_key_exists(strtolower($code), $lang_array))
+        return(default_language_code());
+    return($code);
+}
+
+function language_display()
+{
+    return(languages()[language_code()]);
 }
 
 function add_language_to_url( $url) {
-    $info = parse_url( $url );
-    parse_str( $info['query'], $query );
     $code = language_code();
-    return $info['scheme'] . '://' . $info['host'] . $info['path'] . '?' . http_build_query( $query ? array_merge( $query, array('lang' => $code ) ) : array( 'lang' => $code ) );
+    $parsed_url = parse_url( $url );
+    if(array_key_exists('query', $parsed_url))
+        parse_str( $parsed_url['query'], $query );
+    return $parsed_url['scheme'] . '://' . $parsed_url['host'] . $parsed_url['path'] . '?' . http_build_query( isset($query) ? array_merge( $query, array('lang' => $code ) ) : array( 'lang' => $code ) );
 }
 
 function supported_language_codes()
 {
-    global $languages;
-    return(array_keys($languages));
+    return(array_keys(languages()));
 }
 
 /**

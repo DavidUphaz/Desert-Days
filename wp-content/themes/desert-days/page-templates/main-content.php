@@ -6,7 +6,27 @@
 
 <?php
 
-/*
+/**
+ *
+ *  Return custom field text according to language.
+ */
+function get_custom_sub_field_text($sub_field_name)
+{
+    $text = get_sub_field($sub_field_name . '_' . language_code());
+    if (IsNullOrEmptyString($text))
+        $text = get_sub_field($sub_field_name . '_' . default_language_code());
+    return($text);
+}
+
+function get_custom_field_text($field_name)
+{
+    $text = get_field($field_name . '_' . language_code());
+    if (IsNullOrEmptyString($text))
+        $text = get_field($field_name . '_' . default_language_code());
+    return($text);
+}
+
+/**
  *
  *  Return markup for carousel text
  */
@@ -16,7 +36,7 @@ function get_carousel_text($text_content)
     if ($text_content != "" )
     {
         $template_dir_uri = get_template_directory_uri();
-        $title = get_sub_field('sub_page_title_' . language_code());
+        $title = get_custom_sub_field_text('sub_page_title');
         $text = <<< _TEXT
         <div class="text-area">
             <span class="text mCustomScrollbar">
@@ -79,7 +99,7 @@ function get_carousel($carousel_id, $images, $carousel_text)
     $template_dir_uri = get_template_directory_uri();
     $to_text_markup = $to_carousel_markup = $text_markup = "";
     $text_markup = get_carousel_text($carousel_text);
-    $title = get_sub_field('sub_page_title_' . language_code());
+    $title = get_custom_sub_field_text('sub_page_title');
     $title_cell = $to_text_cell = $prev_image_cell = $next_image_cell = "";
     if ($title != "" && count($images) >= 1)
         $title_cell = '<td class="sub-page-title">' . $title .'</td>';
@@ -149,7 +169,7 @@ $carousel_id = 1;
 $border_markup = "<div class=\"bg-border\"> </div>";
 while (have_rows('subPageRepeater') ) : the_row();
     echo_sub_page_markup(
-            get_carousel("carousel_".$carousel_id, get_sub_field('carousel'), get_sub_field('sub_page_text_' . language_code())),
+            get_carousel("carousel_".$carousel_id, get_sub_field('carousel'), get_custom_sub_field_text('sub_page_text')),
             get_sub_field('background_image')['url'],
             $border_markup
     );
