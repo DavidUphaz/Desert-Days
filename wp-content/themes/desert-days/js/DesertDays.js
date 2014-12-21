@@ -122,4 +122,27 @@ jQuery(document).ready(function(){
             jQuery(event.target).closest('.row').find('.text-area').fadeOut(200);
             resize_carousel_title(jQuery(event.target).closest('.row').find('.carousel'), '.carousel-controls');
 	});
+        
+        jQuery(window).keydown(function(event){
+            if (event.which === 38 || event.which === 40){
+                event.preventDefault();
+                var windowHeight = jQuery(window).height() + 1;
+                var currScrollTop = Math.round(jQuery(document).scrollTop());
+                var modulu = currScrollTop % windowHeight;
+                
+                if (event.which === 38) // arrow up
+                {
+                    offset = -modulu;
+                    if (modulu / windowHeight < .01)
+                        offset = -windowHeight;
+                }
+                else // arrow down
+                {
+                    offset = windowHeight - modulu;
+                    if (offset / windowHeight < .01)
+                        offset = windowHeight;
+                }
+                jQuery('html,body').animate({scrollTop : currScrollTop + offset},300);
+            }
+	});
 });
