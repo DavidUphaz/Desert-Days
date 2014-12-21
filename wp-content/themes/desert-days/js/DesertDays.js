@@ -17,6 +17,26 @@ function resize_carousel_title(carousel, _class)
     }
 }
 
+function smartScroll(dir)
+{
+    var windowHeight = jQuery(window).height() + 1;
+    var currScrollTop = Math.round(jQuery(document).scrollTop());
+    var modulu = currScrollTop % windowHeight;
+
+    if (dir === "up")
+    {
+        offset = -modulu;
+        if (modulu / windowHeight < .01)
+            offset = -windowHeight;
+    }
+    else // dir === "down"
+    {
+        offset = windowHeight - modulu;
+        if (offset / windowHeight < .01)
+            offset = windowHeight;
+    }
+    jQuery('html,body').animate({scrollTop : currScrollTop + offset},300);
+ }
 
 jQuery(document).ready(function(){
         jQuery(".content").mCustomScrollbar({
@@ -35,12 +55,21 @@ jQuery(document).ready(function(){
         
         // For touch devices -- change carousel images through swipe gestures
         jQuery('.sub-page-carousel-frame').swipe( {
-            //Generic swipe handler for all directions
             swipeLeft:function(event) {
                 jQuery(event.target).parent().parent().parent().find('.anchor-prev-slide').trigger( "click" );
             },
             swipeRight: function(event) {
                 jQuery(event.target).parent().parent().parent().find('.anchor-next-slide').trigger( "click" );
+            },
+            threshold:0
+        });
+        
+        jQuery('.fullscreen-cover').swipe( {
+            swipeUp:function() {
+                smartScroll("down");
+            },
+            swipeDown: function() {
+                smartScroll("up");
             },
             threshold:0
         });
@@ -126,23 +155,7 @@ jQuery(document).ready(function(){
         jQuery(window).keydown(function(event){
             if (event.which === 38 || event.which === 40){
                 event.preventDefault();
-                var windowHeight = jQuery(window).height() + 1;
-                var currScrollTop = Math.round(jQuery(document).scrollTop());
-                var modulu = currScrollTop % windowHeight;
-                
-                if (event.which === 38) // arrow up
-                {
-                    offset = -modulu;
-                    if (modulu / windowHeight < .01)
-                        offset = -windowHeight;
-                }
-                else // arrow down
-                {
-                    offset = windowHeight - modulu;
-                    if (offset / windowHeight < .01)
-                        offset = windowHeight;
-                }
-                jQuery('html,body').animate({scrollTop : currScrollTop + offset},300);
+                smartScroll(event.which === 38 ? "up" : "down");
             }
 	});
 });
