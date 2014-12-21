@@ -24,12 +24,22 @@ function default_language_code()
     return(supported_language_codes()[0]);
 }
 
+function client_language_code()
+{
+    require_once( $_SERVER['DOCUMENT_ROOT'] . '/../php/HTTP2.php' );
+    $http2 = new HTTP2();
+    $supported_array = array();
+    foreach (supported_language_codes() as $value)
+        $supported_array[$value] = 'locales/'.$value;
+    return($http2->negotiateLanguage($supported_array, supported_language_codes()[0]));
+}
+
 function language_code()
 {
     $code = filter_input(INPUT_GET, 'lang');
     $lang_array = languages();
     if (!$code || IsNullOrEmptyString($code) || !array_key_exists(strtolower($code), $lang_array))
-        return(default_language_code());
+        return(client_language_code());
     return($code);
 }
 
