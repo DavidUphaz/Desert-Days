@@ -102,13 +102,12 @@ td.sub-page-title::first-letter{
     left:0;
     width: 98%;
     height: 95%;
-    direction: rtl;
     overflow: auto;
     overflow-x: hidden; 
     line-height:2.2;
     letter-spacing:0px;
     font-size: 18px;
-    padding: 25px 25px 25px 0px
+    padding: 25px 0px 25px 0px
 }
 
 /*
@@ -151,4 +150,9 @@ Separator between background images
 .mCS-light-thick.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
     width:2%;
     margin-left:0;
+}
+
+.mCSB_container{
+    margin-left: 20px !important;
+    margin-right: 10px !important;
 }
