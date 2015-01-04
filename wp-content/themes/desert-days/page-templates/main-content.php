@@ -40,7 +40,9 @@ function get_carousel_text($text_content)
         $text = <<< _TEXT
         <div class="text-area">
             <span class="text mCustomScrollbar">
-                $text_content
+                <div>
+                    $text_content
+                </div>
             </span>
             <div class="text-controls">
                 <table>
