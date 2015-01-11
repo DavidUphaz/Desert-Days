@@ -1,3 +1,18 @@
+function popup(url)
+{
+var width = 800;
+var height = 600;
+var left = (screen.width - width)/2;
+var top = (screen.height - height)/2;
+var params = 'width='+ width +', height='+ height+', top='+ top +', left='+ left +
+	', resizable=1, scrollbars=1, menubar=1, toolbar=1';
+	newwin = window.open(url,'', params);
+	if (window.focus)
+	{
+		newwin.focus();
+	}
+}
+
 function resize_carousel_title(carousel, _class)
 {
     var controls = jQuery(carousel).find(_class);
@@ -64,15 +79,15 @@ jQuery(document).ready(function(){
             threshold:0
         });
         
-        jQuery('.fullscreen-cover').swipe( {
-            swipeUp:function() {
-                smartScroll("down");
-            },
-            swipeDown: function() {
-                smartScroll("up");
-            },
-            threshold:0
-        });
+//        jQuery('.fullscreen-cover').swipe( {
+//            swipeUp:function() {
+//                smartScroll("down");
+//            },
+//            swipeDown: function() {
+//                smartScroll("up");
+//            },
+//            threshold:0
+//        });
         
        //Menu button
 	jQuery(window).bind("load resize scroll",function(){
@@ -152,10 +167,10 @@ jQuery(document).ready(function(){
             resize_carousel_title(jQuery(event.target).closest('.row').find('.carousel'), '.carousel-controls');
 	});
         
-        jQuery(window).keydown(function(event){
-            if (event.which === 38 || event.which === 40){
-                event.preventDefault();
-                smartScroll(event.which === 38 ? "up" : "down");
-            }
-	});
+//        jQuery(window).keydown(function(event){
+//            if (event.which === 38 || event.which === 40){
+//                event.preventDefault();
+//                smartScroll(event.which === 38 ? "up" : "down");
+//            }
+//	});
 });

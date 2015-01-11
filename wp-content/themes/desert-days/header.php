@@ -49,7 +49,11 @@ function the_menu_items()
             $label = $page->post_title;
         echo '<li '.$active.'><a href="'.add_language_to_url(get_page_link($page->ID)).'">'.$label.'</a></li>'.PHP_EOL;
     }
+    
+    $google_maps_url = 'javaScript:popup("http://maps.google.com/maps?output=embed&q=Tzukim,+Israel&hl=en&ll=30.708781,35.101318&spn=2.772088,3.460693&sll=37.0625,-95.677068&sspn=38.554089,89.296875&oq=tzuk&hnear=Tzukim,+Israel&t=m&z=8")';
     echo '<li><a style="padding:0;" href="'.home_url().'"><img src="'.get_template_directory_uri().'/Assets/logo.png" alt=""></a></li>'.PHP_EOL;
+    echo '<li><a style="padding:0;" href="#"><img src="'.get_template_directory_uri().'/Assets/language.png" alt=""></a></li>'.PHP_EOL;
+    echo '<li><a style="padding:0;" href=\'' . $google_maps_url .'\'><img src="'.get_template_directory_uri().'/Assets/google_maps.png" alt=""></a></li>'.PHP_EOL;
 }
 ?>
 
