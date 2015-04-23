@@ -15,7 +15,13 @@
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <link rel="shortcut icon" type="image/ico" href="<?php echo get_template_directory_uri().'/favicon.png'; ?>" />
-<?php wp_head(); ?>
+<script>
+    function langDropDown()
+    {
+        jQuery('.dropdown-toggle').dropdown();
+    }
+</script>
+    <?php wp_head(); ?>
 <?php carousel_positions(); ?>
 </head>
 
@@ -36,11 +42,38 @@ function carousel_positions()
         echo 'left: '.get_sub_field('carousel_left_position').'%; top: '.get_sub_field('carousel_top_position').'%;'.'}';
         $carouselIndex++;
     endwhile;
+    $carouselIndex = 1;
+    echo '@media screen and (max-width:767px) {';
+    while (have_rows('subPageRepeater') ) : the_row();
+        echo PHP_EOL.'#carousel_'.$carouselIndex.'{left: 0; top: 0;}';
+        $carouselIndex++;
+    endwhile;
+    echo '}';
     echo PHP_EOL.'</style>'.PHP_EOL;
 }
 
 function the_menu_items()
 {
+    $google_maps_url = 'javaScript:popup(\'http://maps.google.com/maps?output=embed&q=Tzukim,+Israel&hl=en&ll=30.708781,35.101318&spn=2.772088,3.460693&sll=37.0625,-95.677068&sspn=38.554089,89.296875&oq=tzuk&hnear=Tzukim,+Israel&t=m&z=8\')';
+    echo '<li><div class="dropdown">';
+    echo '  <a style="display:block;" href="' . $google_maps_url . '">';
+    echo '      <img style="display:block;" src="'.get_template_directory_uri().'/Assets/location.png" alt="">';
+    echo '  </a>';
+    echo '  <a style="display:block;" id="language-label" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">';
+    echo '      <img style="display:block;" src="'.get_template_directory_uri().'/Assets/language.png" alt="">';
+    echo '  </a>';
+    echo '  <ul class="dropdown-menu" role="menu" aria-labelledby="language-label">';
+    $lang_code = language_code();
+    $_languages = languages();
+    foreach( array_keys($_languages) as $lang_key)
+    {
+        if ($lang_key != $lang_code)
+        {
+            echo '      <li><a href="' . add_language_to_url(current_url(), $lang_key) . '">' . $_languages[$lang_key] .'</a></li>';
+        }
+    }
+    echo '  </ul>';
+    echo '</div></li>'.PHP_EOL;
     $pages = get_pages( array( 'sort_column' => 'menu_order') );
     foreach($pages as $page){
         $active = ($page->ID === get_the_ID() ? 'class="active"' : '');
@@ -50,15 +83,13 @@ function the_menu_items()
         echo '<li '.$active.'><a href="'.add_language_to_url(get_page_link($page->ID)).'">'.$label.'</a></li>'.PHP_EOL;
     }
     
-    $google_maps_url = 'javaScript:popup("http://maps.google.com/maps?output=embed&q=Tzukim,+Israel&hl=en&ll=30.708781,35.101318&spn=2.772088,3.460693&sll=37.0625,-95.677068&sspn=38.554089,89.296875&oq=tzuk&hnear=Tzukim,+Israel&t=m&z=8")';
     echo '<li><a style="padding:0;" href="'.home_url().'"><img src="'.get_template_directory_uri().'/Assets/logo.png" alt=""></a></li>'.PHP_EOL;
-    echo '<li><a style="padding:0;" href="#"><img src="'.get_template_directory_uri().'/Assets/language.png" alt=""></a></li>'.PHP_EOL;
-    echo '<li><a style="padding:0;" href=\'' . $google_maps_url .'\'><img src="'.get_template_directory_uri().'/Assets/google_maps.png" alt=""></a></li>'.PHP_EOL;
 }
 ?>
 
  <body <?php body_class('desert_days_font'); ?>>
-    <a class="showNavbar navbar-toggle">
+    
+    <a class="my-navbar-toggle">
         <img src="<?php echo get_template_directory_uri(); ?>/Assets/show_bar.png" alt="">
     </a>
     <div class="navbar navbar-default navbar-fixed-top navbar-transp" role="navigation">
@@ -76,4 +107,5 @@ function the_menu_items()
             </div><!--/.nav-collapse -->
 	</div>
     </div>
+     
     <div id="top" class="container" style="width:auto;">

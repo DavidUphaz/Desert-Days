@@ -51,10 +51,21 @@ Global font specification
     overflow-y: visible;
 }
 
+.navbar-toggle{
+    visibility: hidden;
+}
+
 @media screen and (max-width:767px) {
 	.navbar-collapse {
 		text-align: right;
 	}
+}
+
+.navbar .container{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .navbar-default .navbar-nav > .active > a {
@@ -65,17 +76,17 @@ Global font specification
     letter-spacing: 3px;
 }
 
-ul.nav {
+ul.nav{
     background:rgba(255,255,255, 0);
     height:32px;
 }
 
-ul.nav a:hover {
+ul.nav a:hover, .dropdown-menu li a:hover {
     background: rgba(112,59,45, .5) !important;
     color: white !important;
 }
 
-.navbar-nav > li > a {
+.navbar-nav > li > a , .dropdown-menu{
     /*padding-top: 15px !important;*/
     padding-bottom: 0px !important;
     background:rgba(255,255,255, .5);
@@ -87,7 +98,10 @@ ul.nav a:hover {
     }
 }
 
-.navbar .nav > li > a {
+.dropdown-menu li a{
+    font-size:16px;
+}
+.navbar .nav > li > a{
     color: black;
     text-decoration: underline;
     font-size:14px;
@@ -99,16 +113,16 @@ ul.nav a:hover {
     height: 3px !important;
 }
 
-.navbar-toggle {
+.my-navbar-toggle {
     background-color: rgba(0,0,0,.2);
     border: 0;
 }
 
-.navbar-toggle:hover {
+.my-navbar-toggle:hover {
     background: rgba(0, 0, 0, .5) !important;
 }
 
-.showNavbar{
+.my-navbar-toggle{
     text-align:center; 
     background:rgba(166,166,166,.3);
     font-weight: bold;
@@ -116,12 +130,12 @@ ul.nav a:hover {
     position:fixed;
     top:3px;
     right:3px;
-    z-index:10;
+    z-index:2000;
     display:none;
     cursor:pointer;
 }
 
-.navbar-toggle {
+.my-navbar-toggle {
     padding:3px;
     background-color:transparent;
 }

@@ -133,17 +133,6 @@ Separator between background images
     background-size: cover;
 }
 
-/*@media screen and (max-width:767px) {
-     display background image such that it completely fills browser viewport width and in right proportion 
-    .sub-page-carousel-cover,.sub-page-cover {
-        background-position: center;
-        background-size: cover;
-        width: 100vw;
-        height: 67vw;
-    }
-}*/
-
-
 .mCSB_scrollTools{
     width:100%;
 }

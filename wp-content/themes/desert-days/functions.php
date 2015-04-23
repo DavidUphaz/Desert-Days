@@ -14,8 +14,8 @@ function languages()
     return(array(
         "he" => "עברית",
         "en" => "English",
-        "fr" => "French",
-        "es" => "Spanish"
+        "fr" => "Francaise",
+        "es" => "Espanyol"
     ));
 }
 
@@ -48,8 +48,8 @@ function language_display()
     return(languages()[language_code()]);
 }
 
-function add_language_to_url( $url) {
-    $code = language_code();
+function add_language_to_url( $url, $code) {
+    if (is_null($code)) $code = language_code();
     $parsed_url = parse_url( $url );
     if(array_key_exists('query', $parsed_url))
         parse_str( $parsed_url['query'], $query );
@@ -59,6 +59,11 @@ function add_language_to_url( $url) {
 function supported_language_codes()
 {
     return(array_keys(languages()));
+}
+
+function current_url()
+{
+    return('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 }
 
 /**
@@ -157,6 +162,7 @@ add_action( 'widgets_init', 'desert_days_widgets_init' );
 function desert_days_scripts() {
         wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap/css/bootstrap.min.css');
         wp_enqueue_style( 'custom-scroll-bar', get_template_directory_uri() . '/jquery.mCustomScrollbar.css');
+//        wp_enqueue_style( 'dropdown', get_template_directory_uri() . '/jquery.dropdown.css');
         wp_enqueue_style( 'desert-days-style', get_stylesheet_uri() );
         if (is_page_template('page-templates/main-content.php'))
         {
@@ -164,6 +170,8 @@ function desert_days_scripts() {
         }
         wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/bootstrap/js/bootstrap.min.js', array('jquery'), '', false );
 	wp_enqueue_script( 'custom-scrollbar-js', get_template_directory_uri() . '/js/jquery.mCustomScrollbar.concat.min.js', array('jquery'), '', false );
+//        wp_enqueue_script( 'dropdown-js', get_template_directory_uri() . '/js/jquery.dropdown.js', array('jquery'), '', false );
+        
         wp_enqueue_script( 'touchSwipe-js', get_template_directory_uri() . '/js/jquery.touchSwipe.min.js', array('jquery'), '', false );
         wp_enqueue_script( 'lazyLoad-js', get_template_directory_uri() . '/js/jquery.lazyload.min.js', array('jquery'), '', false );
         wp_enqueue_script( 'desert-days-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', false );
