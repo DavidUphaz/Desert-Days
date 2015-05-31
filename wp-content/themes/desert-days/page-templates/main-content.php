@@ -8,26 +8,6 @@
 
 /**
  *
- *  Return custom field text according to language.
- */
-function get_custom_sub_field_text($sub_field_name)
-{
-    $text = get_sub_field($sub_field_name . '_' . language_code());
-    if (IsNullOrEmptyString($text))
-        $text = get_sub_field($sub_field_name . '_' . default_language_code());
-    return($text);
-}
-
-function get_custom_field_text($field_name)
-{
-    $text = get_field($field_name . '_' . language_code());
-    if (IsNullOrEmptyString($text))
-        $text = get_field($field_name . '_' . default_language_code());
-    return($text);
-}
-
-/**
- *
  *  Return markup for carousel text
  */
 function get_carousel_text($text_content)
