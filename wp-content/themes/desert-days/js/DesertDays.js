@@ -187,6 +187,10 @@ jQuery(document).ready(function(){
                 'height': border_width + 'px'
             });
         });
+        if (jQuery(window).innerWidth() < jQuery(window).innerHeight())
+            jQuery('body').hide();
+        else
+            jQuery('body').show();
     });
 
     // switch between text/image carousel views
@@ -201,4 +205,5 @@ jQuery(document).ready(function(){
         jQuery(event.target).closest('.row').find('.text-area').fadeOut(200);
         resize_carousel_title(jQuery(event.target).closest('.row').find('.carousel'), '.carousel-controls');
     });
+
 });
