@@ -1,0 +1,23 @@
+/*
+Theme Name: Desert Days
+Layout: Availability
+*/
+
+
+.nav-tabs > li > a{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.rtl-grid{
+    float:right;
+}
+
+
+.wpsbc-calendar{
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.ltr-grid{
+    float:left;
+}
