@@ -72,11 +72,12 @@ Global font specification
     background: rgba(112,59,45, .5);
     color: white;
     font-size: 19px;
-    padding-top: 15px;
+    padding-top: 17px !important;
+    padding-bottom: 4px !important;
     letter-spacing: 3px;
 }
 
-ul.nav{
+navbar-collapse ul.nav{
     background:rgba(255,255,255, 0);
     height:32px;
 }
@@ -90,6 +91,7 @@ ul.nav a:hover, .dropdown-menu li a:hover {
     /*padding-top: 15px !important;*/
     padding-bottom: 0px !important;
     background:rgba(255,255,255, .5);
+    line-height:13px;
 }
 
 @media screen and (min-width:768px) {
@@ -101,11 +103,17 @@ ul.nav a:hover, .dropdown-menu li a:hover {
 .dropdown-menu li a{
     font-size:16px;
 }
-.navbar .nav > li > a{
+
+.nav > li > a{
     color: black;
+    font-weight:bold;
+}
+
+.navbar .nav > li > a{
     text-decoration: underline;
-    font-size:14px;
-    letter-spacing: 3px;
+    font-size:17px;
+    padding-bottom: 1px !important;
+    letter-spacing: 2px;
 }
 
 .navbar .icon-bar {
