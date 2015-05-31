@@ -74,6 +74,43 @@ function IsNullOrEmptyString($s){
 }
 
 /**
+ * Resolve custom field name (possibly using language code
+ */
+
+function resolve_custom_field_name($name)
+{
+    $full_name = $name . '_' . language_code();
+    $v = get_field($full_name);
+    if ($v === NULL)
+    {
+        $full_name = $name . '_' . default_language_code();
+         $v = get_field($full_name);
+    }
+    return($v ? $full_name : NULL);
+}
+
+/**
+ *
+ *  Return custom field text according to language.
+ */
+function get_custom_sub_field_text($sub_field_name)
+{
+    $text = get_sub_field($sub_field_name . '_' . language_code());
+    if (IsNullOrEmptyString($text))
+        $text = get_sub_field($sub_field_name . '_' . default_language_code());
+    return($text);
+}
+
+function get_custom_field_text($field_name)
+{
+    $text = get_field($field_name . '_' . language_code());
+    if (IsNullOrEmptyString($text))
+        $text = get_field($field_name . '_' . default_language_code());
+    return($text);
+}
+
+
+/**
  * Set the content width based on the theme's design and stylesheet.
  */
 if ( ! isset( $content_width ) ) {
@@ -168,6 +205,10 @@ function desert_days_scripts() {
         {
             wp_enqueue_style( 'desert-days-main-content-style', get_template_directory_uri() . '/layouts/main-content.css' );
         }
+        if (is_page_template('page-templates/availability.php'))
+        {
+            wp_enqueue_style( 'desert-days-availability-style', get_template_directory_uri() . '/layouts/availability.css' );
+        }
         wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/bootstrap/js/bootstrap.min.js', array('jquery'), '', false );
 	wp_enqueue_script( 'custom-scrollbar-js', get_template_directory_uri() . '/js/jquery.mCustomScrollbar.concat.min.js', array('jquery'), '', false );
 //        wp_enqueue_script( 'dropdown-js', get_template_directory_uri() . '/js/jquery.dropdown.js', array('jquery'), '', false );
@@ -193,9 +234,10 @@ function write_log ( $log )  {
 }
 endif;
 
-add_action( 'admin_init', 'hide_editor' );
+add_action( 'admin_head', 'hide_editor' );
 function hide_editor() {
-        remove_post_type_support('page', 'editor');
+        if (strpos(get_page_template_slug(), 'main-content') || strpos(get_page_template_slug(), 'availability'))
+            remove_post_type_support('page', 'editor');
 }
 
 /**
