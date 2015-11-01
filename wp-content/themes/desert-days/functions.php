@@ -48,8 +48,9 @@ function language_display()
     return(languages()[language_code()]);
 }
 
-function add_language_to_url( $url, $code) {
-    if (is_null($code)) $code = language_code();
+function add_language_to_url( $url, $code = null) {
+    if ($code === null)
+        $code = language_code();
     $parsed_url = parse_url( $url );
     if(array_key_exists('query', $parsed_url))
         parse_str( $parsed_url['query'], $query );
@@ -101,20 +102,38 @@ function get_custom_sub_field_text($sub_field_name)
     return($text);
 }
 
-function get_custom_field_text($field_name)
+function get_custom_field_text($field_name, $pageID = NULL)
 {
-    $text = get_field($field_name . '_' . language_code());
+    $text = get_field($field_name . '_' . language_code(), $pageID);
     if (IsNullOrEmptyString($text))
-        $text = get_field($field_name . '_' . default_language_code());
+        $text = get_field($field_name . '_' . default_language_code(), $pageID);
     return($text);
 }
 
+require_once(get_template_directory() . '/inc/Mobile_Detect.php');
+
+function isMobile()
+{
+    $mobile_detect = new Mobile_Detect;
+    return($mobile_detect->isMobile());
+}
+function isTablet()
+{
+    $mobile_detect = new Mobile_Detect;
+    return($mobile_detect->isTablet());
+}
 
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
 if ( ! isset( $content_width ) ) {
 	$content_width = 640; /* pixels */
+}
+
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page();
+	
 }
 
 if ( ! function_exists( 'desert_days_setup' ) ) :

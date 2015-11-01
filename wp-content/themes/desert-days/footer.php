@@ -7,9 +7,8 @@
  * @package Desert Days
  */
 ?>
-
 	</div><!-- #content -->
-
+        
 <!--	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'desert-days' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'desert-days' ), 'WordPress' ); ?></a>
@@ -20,6 +19,5 @@
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
-
 </body>
 </html>

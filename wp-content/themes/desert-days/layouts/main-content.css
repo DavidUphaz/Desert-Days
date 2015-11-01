@@ -3,6 +3,46 @@ Theme Name: Desert Days
 Layout: main-Content
 */
 
+.rotate-device{
+    z-index:100000;
+    /*display:none;*/
+    background-color:#6D4923;
+    background-position: center center;
+    background-size: cover;
+    position:fixed;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+}
+
+.rotate-device-logo{
+    display: inline-block;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+}
+
+.rotate-device-text{
+    display: inline-block;
+    padding-left:10px;
+    padding-right:10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    background-color:  rgba(255,255,255,.7);
+    color: #7F3100;
+    white-space: nowrap;
+}
+
 /*
 Carousel stuff
 =============================================
@@ -42,7 +82,7 @@ Carousel stuff
 .sub-page-carousel-frame{
     position: absolute;
     z-index: 4;
-    border: 0px solid rgba(255, 255, 255, .2);
+    border: 0px solid;
 }
 
 td{
@@ -94,7 +134,7 @@ td.sub-page-title::first-letter{
     width: 100%;
     height: 100%;
     z-index: 5;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, .8);
     display: none;
 }
 .text {
@@ -121,6 +161,16 @@ Separator between background images
     z-index:2;
 }
 
+.page-up-down{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    cursor:pointer;
+    height:200%;
+    width: auto;
+}
+
 /* display background image such that it completely fills browser viewport */
 .fullscreen-cover {
     background-position: center;
@@ -134,11 +184,12 @@ Separator between background images
 }
 
 .mCSB_scrollTools{
-    width:100%;
-}
-.mCS-light-thick.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
     width:2%;
-    margin-left:0;
+    left:0;
+}
+.mCS-light-thick.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+.mCS-light-thick.mCSB_scrollTools .mCSB_dragger {
+    width:100%;
 }
 
 .mCSB_container{

@@ -3,21 +3,108 @@ Theme Name: Desert Days
 Layout: Availability
 */
 
-
+a:link, a:hover, a:visited, a:active {
+    color: black;
+}
 .nav-tabs > li > a{
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    text-align:right;
+    border: 0 !important;
+}
+
+.container {
+    padding:0 !important;
+}
+
+.availability-container-1{
+    min-height:100vh;
+    padding-top:70px;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
+
+.availability-container-2{
+    display: inline-block;
+}
+
+.availability-column{
+    margin-top:50px;
+    margin-left:50px;
+    margin-right:50px;
+    /*border: black solid 1px !important;*/
 }
 .rtl-grid{
     float:right;
-}
-
-
-.wpsbc-calendar{
-    margin:0 !important;
-    padding:0 !important;
+    text-align:right;
 }
 
 .ltr-grid{
     float:left;
+    text-align:left;
 }
+
+.wpsbc-calendar{
+    margin:0 !important;
+    padding:0 !important;
+    border: black solid 0px !important;
+}
+
+/* Calendar code.. */
+.wpsbc-tooltip{
+    width: auto !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    direction: rtl;
+    background-color: #FFFF88 !important;
+}
+
+.wpsbc-calendar{
+    height: auto !important;
+    border: 1px solid #816648 !important;
+
+}
+
+div.wpsbc-calendar ul.wpsbc-weekdays li,
+div.wpsbc-calendar,
+div.wpsbc-calendar ul li.wpsbc-pad,
+.wpsbc-dropdown
+{
+        background-color: #CBBEAF !important;
+}
+.status-wpsbc-grey-out-history {
+    background-color: #B5A797 !important;
+}
+div.wpsbc-calendar div.wpsbc-heading a.wpsbc-prev,
+div.wpsbc-calendar div.wpsbc-heading a.wpsbc-next
+{
+    opacity: .5;
+}
+
+.nav-tabs > li {
+    margin:0 !important;
+}
+
+.nav-tabs > li > a{
+    padding:2px !important;
+    border: 0 solid #816648 !important;
+    border-radius: 0 !important;
+}
+.nav-tabs{
+    margin-right:10px;
+}
+
+.nav-tabs > li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+    background-color: transparent !important;
+}
+
+.nav-tabs > li.active>a{
+    color:white !important;
+}
+
+/*a[href^="tel:"]:before {
+    content: "\260E";
+    display: block;
+    margin-right: 0.5em;
+}*/

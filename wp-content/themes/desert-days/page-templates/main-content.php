@@ -19,7 +19,7 @@ function get_carousel_text($text_content)
         $title = get_custom_sub_field_text('sub_page_title');
         $text = <<< _TEXT
         <div class="text-area">
-            <span class="text mCustomScrollbar">
+            <span class="text content mCustomScrollbar">
                 <div>
                     $text_content
                 </div>
@@ -107,7 +107,7 @@ _TO_TEXT_MARKUP;
     $carousel_items_markup = get_carousel_image_items($images);
     
     $carousel_markup = <<< _CAROUSEL_MARKUP
-    <div id="$carousel_id" style="visibility:hidden;" class="carousel slide" data-ride="carousel" data-interval="false">
+    <div id="$carousel_id" style="visibility:hidden;" class="carousel slide" data-ride="carousel" data-interval="2000">
         $text_markup
         $to_carousel_markup
         <div class="carousel-inner">
@@ -126,11 +126,12 @@ _CAROUSEL_MARKUP;
  *
  *  output (echo) markup for sub page
  */
-function echo_sub_page_markup($carousel_markup, $background_url, $border_markup)
+function echo_sub_page_markup($id, $carousel_markup, $background_url, $border_markup)
 {
     $template_dir_uri = get_template_directory_uri();
+    $id = !empty($id) ? ' id = "' . $id . '" ' : '';
     $markup = <<< _MARKUP
-    <div class="row sub-page-cover">
+    <div $id class="row sub-page-cover">
         <div  style="position:relative;">
             <div class="fullscreen-cover lazy_backgrounds" data-original="$background_url" style="background-image:url('$template_dir_uri/Assets/tiny.png');">
             </div>
@@ -148,9 +149,14 @@ _MARKUP;
 function echo_sub_pages()
 {
 $carousel_id = 1;
-$border_markup = "<div class=\"bg-border\"> </div>";
+$border_markup = '<div class="bg-border">' .
+        (
+            isMobile() || isTablet() ? '' :
+            '<img class="page-up-down" src="' . get_template_directory_uri() . '/Assets/PageUpDown.png" />') .
+        '</div>';
 while (have_rows('subPageRepeater') ) : the_row();
     echo_sub_page_markup(
+            get_sub_field('sub_page_id'),
             get_carousel("carousel_".$carousel_id, get_sub_field('carousel'), get_custom_sub_field_text('sub_page_text')),
             get_sub_field('background_image')['url'],
             $border_markup
@@ -161,6 +167,11 @@ endwhile;
 ?>
 
 <?php get_header(); ?>
-    <?php echo_sub_page_markup("", get_field('top_background')['url'], ""); ?>
-    <?php echo_sub_pages(); ?>
+    <div class="rotate-device lazy_backgrounds" data-original="<?php echo get_template_directory_uri(); ?>/Assets/ToLandscape.jpg">
+        <img class="rotate-device-logo" src="<?php echo get_template_directory_uri(); ?>/Assets/logo.png" alt="">
+        <div class="rotate-device-text" ><?php echo get_custom_field_text('rotate_device_text', 'option'); ?></div>
+    </div>
+
+<?php echo_sub_page_markup("","", get_field('top_background')['url'], ""); ?>
+<?php echo_sub_pages(); ?>
 <?php get_footer(); ?>

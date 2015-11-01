@@ -76,37 +76,30 @@ function the_menu_items()
     echo '  </ul>';
     echo '</div></li>'.PHP_EOL;
     $pages = get_pages( array( 'sort_column' => 'menu_order') );
+    $counter = 0;
     foreach($pages as $page){
-        $active = ($page->ID === get_the_ID() ? 'class="active"' : '');
+        $active = ($page->ID === get_the_ID() ? 'active' : '');
+        $parity = $counter++ % 2 == 0 ? 'even-item' : 'odd-item';
         $label = get_field('page_title_'.language_code(), $page->ID);
+        $hide_on_attr = ' hide-page-on="' . get_field('hide_page_on', $page->ID) . '" ';
         if (IsNullOrEmptyString($label))
             $label = $page->post_title;
-        echo '<li '.$active.'><a href="'.add_language_to_url(get_page_link($page->ID)).'">'.$label.'</a></li>'.PHP_EOL;
+        echo '<li ' . $hide_on_attr . (!empty($active) ? 'class="' . $active . '" ' : '') . '><a class="' . $parity . '" href="'.add_language_to_url(get_page_link($page->ID)).'">'.$label.'</a></li>'.PHP_EOL;
     }
     
-    echo '<li><a style="padding:0; padding-bottom:0 !important;" href="'.home_url().'"><img src="'.get_template_directory_uri().'/Assets/logo.png" alt=""></a></li>'.PHP_EOL;
+    echo '<li><a style="padding:0 !important;" href="'.home_url().'"><img src="'.get_template_directory_uri().'/Assets/logo.png" alt=""></a></li>'.PHP_EOL;
 }
 ?>
 
- <body <?php body_class('desert_days_font'); ?>>
-    
+ <body <?php body_class('desert-days-text'); ?>>
     <a class="my-navbar-toggle">
         <img src="<?php echo get_template_directory_uri(); ?>/Assets/show_bar.png" alt="">
     </a>
     <div class="navbar navbar-default navbar-fixed-top navbar-transp" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <img src="<?php echo get_template_directory_uri(); ?>/Assets/show_bar.png" alt="">
-                </a>
-            </div>
-            <div class="navbar-collapse collapse" style="border:0 !important;">
-                <ul class="nav navbar-nav">
-                    <?php the_menu_items() ?>
-                </ul>
-            </div><!--/.nav-collapse -->
-	</div>
+        <div class="navbar-desert-days" style="border:0 !important;">
+            <ul class="nav navbar-nav">
+                <?php the_menu_items() ?>
+            </ul>
+        </div>
     </div>
-     
     <div id="top" class="container" style="width:auto;">
